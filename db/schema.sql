@@ -6,15 +6,15 @@ CREATE TABLE employee (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    role_id INT FOREIGN KEY REFERENCES role(id),
-    manager_id INT FOREIGN KEY REFERENCES role(id) NULL
+    role_id INT,
+    manager_id INT NULL
 );
 
 CREATE TABLE role (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL(10, 2) NOT NULL,
-    department_id INT FOREIGN KEY REFERENCES department(id) NOT NULL
+    department_id INT NOT NULL
 );
 
 CREATE TABLE department (

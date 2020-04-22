@@ -45,7 +45,7 @@ async function mainMenu() {
             // Use role and manager data to get id's
             const chosenRole = roleList.filter(roleItem => roleItem.title === role);
             const role_id = chosenRole[0].id;
-            console.log(role_id);
+            const chosenManager = 
             // Use final data and queryHelper to add employee
             
             // Run mainMenu()

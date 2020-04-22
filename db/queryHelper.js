@@ -34,20 +34,26 @@ function viewAllByManager(first_name, last_name) {
 
 async function getAllManager() {
     try {
+        // Get list of managers
         const managerList = await connection.query(viewByManagerQuery);
-        const managerListNames = [];
+        // Declare an empty array for names of managers
+        const managerNames = [];
+        // Loop through list of managers and push the names into managerNames
         await managerList.forEach(manager => {
             if (manager.manager !== null) {
-                managerListNames.push(manager.manager);
+                managerNames.push(manager.manager);
             }
         });
-        const managerListFiltered = [];
-        await managerListNames.forEach(manager => {
-            if (managerListFiltered.indexOf(manager) < 0) {
-                managerListFiltered.push(manager)
+        // Declare empty array for no duplicate names
+        const managerNamesFiltered = [];
+        // Loop through managerNames and push the names only if it hasn't been pushed yet
+        await managerNames.forEach(manager => {
+            if (managerNamesFiltered.indexOf(manager) < 0) {
+                managerNamesFiltered.push(manager)
             }
         });
-        return managerListFiltered;
+        // Return the 
+        return managerNamesFiltered;
     } catch (err) {
         console.log(err);
     }

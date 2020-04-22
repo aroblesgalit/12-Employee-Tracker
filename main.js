@@ -48,9 +48,8 @@ async function mainMenu() {
             const chosenManager = await manager.split(" ");
             const data = await queryHelper.viewAllByManager(chosenManager[0], chosenManager[1]);
             const manager_id = data[0].id;
-            console.log(manager_id);
-            // Use final data and queryHelper to add employee
-            
+            // Use data for first_name, last_name, role_id, and manager_id and queryHelper to add employee
+            await queryHelper.addEmployee(first_name, last_name, role_id, manager_id);
             // Run mainMenu()
             mainMenu();
         }

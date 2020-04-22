@@ -44,15 +44,19 @@ function departmentPrompt() {
     ])
 }
 
-function managerPrompt() {
+function managerPrompt(managerList) {
     return inquirer.prompt([
         {
-            
+            type: "list",
+            name: "manager",
+            message: "Choose a manager to view:",
+            choices: managerList
         }
     ])
 }
 
 module.exports = {
     mainMenu,
-    departmentPrompt
+    departmentPrompt,
+    managerPrompt
 }

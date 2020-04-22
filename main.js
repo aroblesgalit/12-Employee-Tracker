@@ -28,7 +28,14 @@ async function mainMenu() {
             console.table(data);
             mainMenu();
         } else if (action === "View all employees by Manager") {
-            console.log("Viewing all employees by Manager");
+            const managerList = await queryHelper.getAllManager();
+            const { manager } = await questions.managerPrompt(managerList);
+            console.log(manager);
+            const managerName = await manager.split(" ");
+            const first_name = managerName[0];
+            const last_name = managerName[1];
+            const data = await queryHelper.viewAllByManager(first_name, last_name);
+            console.table(data);
             mainMenu();
         }
     } catch(err) {

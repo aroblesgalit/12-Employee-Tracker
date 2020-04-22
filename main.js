@@ -31,9 +31,7 @@ async function mainMenu() {
             const managerList = await queryHelper.getAllManager();
             const { manager } = await questions.managerPrompt(managerList);
             const managerName = await manager.split(" ");
-            const first_name = managerName[0];
-            const last_name = managerName[1];
-            const data = await queryHelper.viewAllByManager(first_name, last_name);
+            const data = await queryHelper.viewAllByManager(managerName[0], managerName[1]);
             console.table(data);
             mainMenu();
         } else if (action === "Add an employee") {

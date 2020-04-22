@@ -52,7 +52,7 @@ async function getAllManager() {
                 managerNamesFiltered.push(manager)
             }
         });
-        // Return the 
+        // Return the array managerNamesFiltered
         return managerNamesFiltered;
     } catch (err) {
         console.log(err);

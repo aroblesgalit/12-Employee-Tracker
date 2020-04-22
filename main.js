@@ -36,6 +36,20 @@ async function mainMenu() {
             const data = await queryHelper.viewAllByManager(first_name, last_name);
             console.table(data);
             mainMenu();
+        } else if (action === "Add an employee") {
+            // Need list of roles and managers
+            const managerList = await queryHelper.getAllManager();
+            const { roleTitles, roleList } = await queryHelper.getAllRoles();
+            // Run prompt and get data
+            const { first_name, last_name, role, manager } = await questions.addEmployeePrompt(roleTitles, managerList);
+            // Use role and manager data to get id's
+            const chosenRole = roleList.filter(roleItem => roleItem.title === role);
+            const role_id = chosenRole[0].id;
+            console.log(role_id);
+            // Use final data and queryHelper to add employee
+            
+            // Run mainMenu()
+            mainMenu();
         }
     } catch(err) {
         console.log(err);

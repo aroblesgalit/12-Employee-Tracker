@@ -55,8 +55,36 @@ function managerPrompt(managerList) {
     ])
 }
 
+function addEmployeePrompt(roleTitles, managerList) {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "Please enter the employee's first name:"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "Please enter the employee's last name:"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Please select the employee's role:",
+            choices: roleTitles
+        },
+        {
+            type: "list",
+            name: "manager",
+            message: "Please select the employee's manager:",
+            choices: managerList
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
-    managerPrompt
+    managerPrompt,
+    addEmployeePrompt
 }

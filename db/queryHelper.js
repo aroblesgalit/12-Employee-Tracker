@@ -16,31 +16,25 @@ const viewByManagerQuery = `
     RIGHT JOIN department ON department_id = department.id
 `
 
+const viewAllRoles = `
+    SELECT * FROM role
+`
+
 function viewAllEmployees() {
-    return connection.query(
-        `${viewAllEmployeesQuery}`
-    );
+    return connection.query(viewAllEmployeesQuery);
 }
 
 function viewAllByDepartment(department) {
-    return connection.query(
-        `${viewAllEmployeesQuery}
-        WHERE department.name = "${department}"`
-    );
+    return connection.query(viewAllEmployeesQuery + " WHERE department.name = ?", [department]);
 }
 
 function viewAllByManager(first_name, last_name) {
-    return connection.query(
-        `${viewByManagerQuery}
-        WHERE manager.first_name = "${first_name}" AND manager.last_name = "${last_name}"`
-    );
+    return connection.query(viewByManagerQuery + " WHERE manager.first_name = ? AND manager.last_name = ?", [first_name, last_name]);
 }
 
 async function getAllManager() {
     try {
-        const managerList = await connection.query(
-            `${viewByManagerQuery}`
-        );
+        const managerList = await connection.query(viewByManagerQuery);
         const managerListNames = [];
         await managerList.forEach(manager => {
             if (manager.manager !== null) {
@@ -59,10 +53,29 @@ async function getAllManager() {
     }
 }
 
+async function getAllRoles() {
+    try {
+        const roleList = await connection.query(viewAllRoles);
+        const roleTitles = [];
+        await roleList.forEach(role => {
+            roleTitles.push(role.title);
+        });
+        return {roleTitles, roleList};
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function addEmployee(first_name, last_name, role_id, manager_id) {
+    return connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [first_name, last_name, role_id, manager_id]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
     getAllManager,
     viewAllByManager,
+    getAllRoles,
+    addEmployee,
     connection
 }

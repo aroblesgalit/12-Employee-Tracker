@@ -1,5 +1,6 @@
 const connection = require("./connection");
 
+// Query for employee table
 const viewAllEmployeesQuery = `
     SELECT employee.id, employee.first_name, employee.last_name, role.title AS role, role.salary, department.name AS department, CONCAT(manager.first_name, " ", manager.last_name) AS manager
     FROM employee
@@ -8,6 +9,7 @@ const viewAllEmployeesQuery = `
     LEFT JOIN employee AS manager ON employee.manager_id = manager.id
 `
 
+// Query for viewing manager table
 const viewByManagerQuery = `
     SELECT manager.id, CONCAT(manager.first_name, " ", manager.last_name) AS manager, employee.id AS employee_id, employee.first_name, employee.last_name, role.title AS role, role.salary, department.name AS department
     FROM employee AS manager
@@ -16,22 +18,27 @@ const viewByManagerQuery = `
     RIGHT JOIN department ON department_id = department.id
 `
 
+// Query for viewing role table
 const viewAllRoles = `
     SELECT * FROM role
 `
 
+// Query to view all employees
 function viewAllEmployees() {
     return connection.query(viewAllEmployeesQuery);
 }
 
+// Query to view employees by department
 function viewAllByDepartment(department) {
     return connection.query(viewAllEmployeesQuery + " WHERE department.name = ?", [department]);
 }
 
+// Query to view employee by manager
 function viewAllByManager(first_name, last_name) {
     return connection.query(viewByManagerQuery + " WHERE manager.first_name = ? AND manager.last_name = ?", [first_name, last_name]);
 }
 
+// Function to get an array of existing manager names
 async function getAllManager() {
     try {
         // Get list of managers
@@ -59,6 +66,7 @@ async function getAllManager() {
     }
 }
 
+// Function to get an array of all the existing roles
 async function getAllRoles() {
     try {
         const roleList = await connection.query(viewAllRoles);
@@ -72,10 +80,12 @@ async function getAllRoles() {
     }
 }
 
+// Query to add an employee
 function addEmployee(first_name, last_name, role_id, manager_id) {
     return connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [first_name, last_name, role_id, manager_id]);
 }
 
+// Function to get all names of employees
 async function getAllEmployeeNames() {
     try {
         // Get complete list of employees
@@ -92,12 +102,19 @@ async function getAllEmployeeNames() {
     }
 }
 
+// Query to remove an employee by id
 function removeEmployee(id) {
     return connection.query("DELETE FROM employee WHERE id = ?", [id]);
 }
 
+// Query to get an employee by first and last name
 function getEmployeebyName(first_name, last_name) {
     return connection.query(viewAllEmployeesQuery + " WHERE employee.first_name = ? AND employee.last_name = ?", [first_name, last_name]);
+}
+
+// Query to update the role of an employee
+function updateEmployeeRole(role_id, id) {
+    return connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [role_id, id]);
 }
 
 module.exports = {
@@ -110,5 +127,6 @@ module.exports = {
     getAllEmployeeNames,
     removeEmployee,
     getEmployeebyName,
+    updateEmployeeRole,
     connection
 }

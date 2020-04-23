@@ -6,7 +6,7 @@ async function main() {
 
         mainMenu();
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 };
@@ -97,11 +97,28 @@ async function mainMenu() {
             // Run mainMenu()
             mainMenu();
         } else if (action === "Update an employee's manager") {
+            // Get list of of employees and managers
+            const employeeNames = await queryHelper.getAllEmployeeNames();
+            const managerList = await queryHelper.getAllManager();
             // Prompt user for the employee and manager
-            // Then choose which manager to update to
+            const { employee, manager } = await questions.updateEmployeeManager(employeeNames, managerList);
+            // Split employee name into an array of first and last name
+            const chosenEmployee = await employee.split(" ");
+            // Get id of employee by first and last name
+            const employeeData = await queryHelper.getEmployeebyName(chosenEmployee[0], chosenEmployee[1]);
+            const id = employeeData[0].id;
+            // Split manager's name into an array of first and last name
+            const managerName = await manager.split(" ");
+            // Pass first and last name to query viewAllByManager and get id of manager
+            const data = await queryHelper.viewAllByManager(managerName[0], managerName[1]);
+            const manager_id = data[0].id;
+            // Pass manager_id and id into query to update an employee's manager
+            await queryHelper.updateEmployeeManager(manager_id, id);
+            // Run mainMenu()
+            mainMenu();
         }
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 };

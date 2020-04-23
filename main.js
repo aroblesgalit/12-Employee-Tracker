@@ -138,7 +138,7 @@ async function mainMenu() {
 
         } else if (action === "Add a role") {
             // Get list of deparment names and data
-            const { departmentNames, departmentList } = await queryHelper.getAllDeparments();
+            const { departmentNames } = await queryHelper.getAllDeparments();
             // Prompt user for role title, salary, and department
             const { title, salary, department } = await questions.addRolePrompt(departmentNames);
             // Get department data by department name
@@ -155,11 +155,8 @@ async function mainMenu() {
             const { roleTitles, roleList } = await queryHelper.getAllRoles();
             // Prompt user to chooes a role to remove
             const { role } = await questions.chooseRole(roleTitles);
-            // Get id of role
-            const chosenRole = roleList.filter(roleItem => roleItem.title === role);
-            const role_id = chosenRole[0].id;
             // Pass id to query for removing role
-            await queryHelper.removeRole(role_id);
+            await queryHelper.removeRole(role);
             // Run mainMenu()
             mainMenu();
         

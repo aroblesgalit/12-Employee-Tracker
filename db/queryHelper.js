@@ -147,7 +147,7 @@ async function getAllDeparments() {
         await departmentList.forEach(department => {
             departmentNames.push(department.name);
         });
-        return { departmentNames, departmentList };
+        return { departmentNames };
     } catch (err) {
         console.log(err);
     }

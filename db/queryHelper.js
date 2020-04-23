@@ -19,7 +19,7 @@ const viewByManagerQuery = `
 `
 
 // Query for viewing role table
-const viewAllRoles = `
+const viewAllRolesQuery = `
     SELECT * FROM role
 `
 
@@ -122,6 +122,11 @@ function updateEmployeeManager(manager_id, id) {
     return connection.query("UPDATE employee SET manager_id = ? WHERE id = ?", [manager_id, id]);
 }
 
+// Query to view all roles
+function viewAllRoles() {
+    return connection.query(viewAllRolesQuery);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -134,5 +139,6 @@ module.exports = {
     getEmployeebyName,
     updateEmployeeRole,
     updateEmployeeManager,
+    viewAllRoles,
     connection
 }

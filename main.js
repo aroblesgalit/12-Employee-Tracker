@@ -31,8 +31,10 @@ async function mainMenu() {
             mainMenu();
 
         } else if (action === "View all employees by department") {
+            // Get list of department names
+            const { departmentNames } = await queryHelper.getAllDeparments();
             // Prompt user for a department
-            const { department } = await questions.departmentPrompt();
+            const { department } = await questions.departmentPrompt(departmentNames);
             // Then pass the chosen department into query viewAllByDepartment
             const data = await queryHelper.viewAllByDepartment(department);
             // Log data to a table

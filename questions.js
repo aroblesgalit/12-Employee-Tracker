@@ -27,19 +27,13 @@ function mainMenu() {
     ])
 }
 
-function departmentPrompt() {
+function departmentPrompt(departmentNames) {
     return inquirer.prompt([
         {
             type: "list",
             name: "department",
             message: "Choose a department to view:",
-            choices: [
-                "Sales",
-                "Engineering",
-                "Finance",
-                "Legal"
-            ]
-
+            choices: departmentNames
         }
     ])
 }

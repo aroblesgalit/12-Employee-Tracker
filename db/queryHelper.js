@@ -85,7 +85,7 @@ async function getAllEmployeeNames() {
             return employee.first_name + " " + employee.last_name;
         });
         // Return an array of employee names and the employee list
-        return { employeeList, employeeNames };
+        return employeeNames;
 
     } catch (err) {
         console.log(err);
@@ -94,6 +94,10 @@ async function getAllEmployeeNames() {
 
 function removeEmployee(id) {
     return connection.query("DELETE FROM employee WHERE id = ?", [id]);
+}
+
+function getEmployeebyName(first_name, last_name) {
+    return connection.query(viewAllEmployeesQuery + " WHERE employee.first_name = ? AND employee.last_name = ?", [first_name, last_name]);
 }
 
 module.exports = {
@@ -105,5 +109,6 @@ module.exports = {
     addEmployee,
     getAllEmployeeNames,
     removeEmployee,
+    getEmployeebyName,
     connection
 }

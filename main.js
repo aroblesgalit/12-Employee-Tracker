@@ -66,12 +66,18 @@ async function mainMenu() {
             mainMenu();
         } else if (action === "Remove an employee") {
             // Get list of employees
-            const { employeeList, employeeNames } = await queryHelper.getAllEmployeeNames();
+            const employeeNames = await queryHelper.getAllEmployeeNames();
             // Prompt user to choose an employee
-            const { employee } = await questions.chooseEmployee(employeeList);
-            // Get id of choosen employee
-
+            const { employee } = await questions.chooseEmployee(employeeNames);
+            // Split employee name into an array of first and last name
+            const chosenEmployee = await employee.split(" ");
+            // Get id of employee by first and last name
+            const employeeData = await queryHelper.getEmployeebyName(chosenEmployee[0], chosenEmployee[1]);
+            const id = employeeData[0].id;
             // Use id and pass it on to query to remove employee
+            await queryHelper.removeEmployee(id);
+            // Run mainMenu()
+            mainMenu();
         }
     } catch(err) {
         console.log(err);

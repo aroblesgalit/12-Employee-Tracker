@@ -20,7 +20,9 @@ const viewByManagerQuery = `
 
 // Query for viewing role table
 const viewAllRolesQuery = `
-    SELECT * FROM role
+    SELECT role.id, role.title, role.salary, department.name
+    FROM role
+    LEFT JOIN department ON department_id = department.id
 `
 
 // Query to view all employees
@@ -69,12 +71,12 @@ async function getAllManager() {
 // Function to get an array of all the existing roles
 async function getAllRoles() {
     try {
-        const roleList = await connection.query(viewAllRoles);
+        const roleList = await connection.query(viewAllRolesQuery);
         const roleTitles = [];
         await roleList.forEach(role => {
             roleTitles.push(role.title);
         });
-        return {roleTitles, roleList};
+        return { roleTitles, roleList };
     } catch (err) {
         console.log(err);
     }
@@ -114,12 +116,12 @@ function getEmployeebyName(first_name, last_name) {
 
 // Query to update the role of an employee
 function updateEmployeeRole(role_id, id) {
-    return connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [role_id, id]);
+    return connection.query("UPDATE employee SET role_id = ? WHERE employee.id = ?", [role_id, id]);
 }
 
 // Query to update the manager of an employee
 function updateEmployeeManager(manager_id, id) {
-    return connection.query("UPDATE employee SET manager_id = ? WHERE id = ?", [manager_id, id]);
+    return connection.query("UPDATE employee SET manager_id = ? WHERE employee.id = ?", [manager_id, id]);
 }
 
 // Query to view all roles

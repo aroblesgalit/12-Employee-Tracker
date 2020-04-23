@@ -116,6 +116,10 @@ async function mainMenu() {
             await queryHelper.updateEmployeeManager(manager_id, id);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "View all roles") {
+            const data = await queryHelper.viewAllRoles();
+            console.table(data);
+            mainMenu();
         }
 
     } catch (err) {

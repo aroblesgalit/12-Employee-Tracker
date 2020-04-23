@@ -183,6 +183,24 @@ async function mainMenu() {
             await queryHelper.removeDepartment(department);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "View a department's budget") {
+            // Get list of all departments
+            const { departmentNames } = await queryHelper.getAllDeparments();
+            // Prompt user for which department to view
+            const { department } = await questions.departmentPrompt(departmentNames);
+            // Then pass the chosen department into query viewAllByDepartment
+            const data = await queryHelper.viewAllByDepartment(department);
+            // Combine the salaries
+            let budget = 0;
+            data.forEach(employee => {
+                return budget += employee.salary;
+            });
+            // Print to console
+            console.log("\n----------------------------------------------\n\n Budget for the "
+                        + department + " department: $" 
+                        + budget + "\n\n----------------------------------------------\n");
+            // Run mainMenu()
+            mainMenu();
         }
  
     } catch (err) {

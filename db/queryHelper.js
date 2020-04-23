@@ -92,6 +92,10 @@ async function getAllEmployeeNames() {
     }
 }
 
+function removeEmployee(id) {
+    return connection.query("DELETE FROM employee WHERE id = ?", [id]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -100,5 +104,6 @@ module.exports = {
     getAllRoles,
     addEmployee,
     getAllEmployeeNames,
+    removeEmployee,
     connection
 }

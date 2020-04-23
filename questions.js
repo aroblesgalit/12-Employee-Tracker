@@ -127,6 +127,27 @@ function updateEmployeeManager(employeeNames, managerList) {
     ])
 }
 
+function addRolePrompt(departmentList) {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "Please enter the role's title:"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "Please enter the role's salary:"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Please select the role's deparment:",
+            choices: departmentList
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
@@ -134,5 +155,6 @@ module.exports = {
     addEmployeePrompt,
     chooseEmployee,
     updateEmployeeRole,
-    updateEmployeeManager
+    updateEmployeeManager,
+    addRolePrompt
 }

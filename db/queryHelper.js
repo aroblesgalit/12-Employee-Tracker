@@ -25,6 +25,11 @@ const viewAllRolesQuery = `
     LEFT JOIN department ON department_id = department.id
 `
 
+// Query for viewing department table
+const viewAllDepartmentsQuery =`
+    SELECT * FROM department
+`
+
 // Query to view all employees
 function viewAllEmployees() {
     return connection.query(viewAllEmployeesQuery);
@@ -134,6 +139,20 @@ function addRole(title, salary, department_id) {
     return connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [title, salary, department_id]); 
 }
 
+// Function to get an array of all deparments
+async function getAllDeparments() {
+    try {
+        const departmentList = await connection.query(viewAllDepartmentsQuery);
+        const departmentNames = [];
+        await departmentList.forEach(department => {
+            departmentNames.push(department.name);
+        });
+        return { departmentNames, departmentList };
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -148,5 +167,6 @@ module.exports = {
     updateEmployeeManager,
     viewAllRoles,
     addRole,
+    getAllDeparments,
     connection
 }

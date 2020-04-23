@@ -5,7 +5,7 @@ This was a homework assignment where we were challenged to architect and build a
 
 ## Completed
 * Design the following database schema containing three tables:
-![Database Schema](Assets/schema.png)    
+![Database Schema](assets/schema.png)    
 * Build a command-line application that at a minimum allows the user to:
   * Add departments, roles, employees
   * View departments, roles, employees

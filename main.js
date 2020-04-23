@@ -78,8 +78,30 @@ async function mainMenu() {
             await queryHelper.removeEmployee(id);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "Update an employee's role") {
+            // Get list of employees and roles
+            const employeeNames = await queryHelper.getAllEmployeeNames();
+            const { roleTitles, roleList } = await queryHelper.getAllRoles();
+            // Prompt user to choose an employee and a role
+            const { employee, role } = await questions.updateEmployeeRole(employeeNames, roleTitles);
+            // Split employee name into an array of first and last name
+            const chosenEmployee = await employee.split(" ");
+            // Use role data to get its id
+            const chosenRole = roleList.filter(roleItem => roleItem.title === role);
+            const role_id = chosenRole[0].id;
+            // Get id of employee by first and last name
+            const employeeData = await queryHelper.getEmployeebyName(chosenEmployee[0], chosenEmployee[1]);
+            const id = employeeData[0].id;
+            // Use role_id and id and pass them on to query to update employee's role
+            await queryHelper.updateEmployeeRole(role_id, id);
+            // Run mainMenu()
+            mainMenu();
         }
     } catch(err) {
         console.log(err);
     }
 };
+
+async function getEmployeeData() {
+
+}

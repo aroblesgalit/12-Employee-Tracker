@@ -158,6 +158,11 @@ function getDepartmentByName(name) {
     return connection.query(viewAllDepartmentsQuery + " WHERE name = ?", [name])
 }
 
+// Query for removing a role
+function removeRole(id) {
+    return connection.query("DELETE FROM role WHERE id = ?", [id]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -174,5 +179,6 @@ module.exports = {
     addRole,
     getAllDeparments,
     getDepartmentByName,
+    removeRole,
     connection
 }

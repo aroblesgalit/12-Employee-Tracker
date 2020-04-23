@@ -169,6 +169,17 @@ function addDepartmentPrompt() {
     ])
 }
 
+function removeDepartmentPrompt(departmentNames) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "department",
+            message: "Please choose a department to remove:",
+            choices: departmentNames
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
@@ -179,5 +190,6 @@ module.exports = {
     updateEmployeeManager,
     addRolePrompt,
     chooseRole,
-    addDepartmentPrompt
+    addDepartmentPrompt,
+    removeDepartmentPrompt
 }

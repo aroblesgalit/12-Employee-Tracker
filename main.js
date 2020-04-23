@@ -168,6 +168,13 @@ async function mainMenu() {
             console.table(data);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "Add a department") {
+            // Prompt user for the name of the department
+            const { department } = await questions.addDepartmentPrompt();
+            // Pass name to query for adding a department
+            await queryHelper.addDepartment(department);
+            // Run mainMenu()
+            mainMenu();
         }
  
     } catch (err) {

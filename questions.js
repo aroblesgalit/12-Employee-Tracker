@@ -159,6 +159,16 @@ function chooseRole(roleTitles) {
     ])
 }
 
+function addDepartmentPrompt() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "department",
+            message: "Please enter a name for this department:"
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
@@ -168,5 +178,6 @@ module.exports = {
     updateEmployeeRole,
     updateEmployeeManager,
     addRolePrompt,
-    chooseRole
+    chooseRole,
+    addDepartmentPrompt
 }

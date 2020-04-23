@@ -148,6 +148,18 @@ async function mainMenu() {
             // Run mainMenu()
             mainMenu();
 
+        } else if (action === "Remove a role") {
+            // Get list of roles
+            const { roleTitles, roleList } = await queryHelper.getAllRoles();
+            // Prompt user to chooes a role to remove
+            const { role } = await questions.chooseRole(roleTitles);
+            // Get id of role
+            const chosenRole = roleList.filter(roleItem => roleItem.title === role);
+            const role_id = chosenRole[0].id;
+            // Pass id to query for removing role
+            await queryHelper.removeRole(role_id);
+            // Run mainMenu()
+            mainMenu();
         }
  
     } catch (err) {

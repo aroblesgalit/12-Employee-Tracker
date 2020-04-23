@@ -127,7 +127,7 @@ function updateEmployeeManager(employeeNames, managerList) {
     ])
 }
 
-function addRolePrompt(departmentList) {
+function addRolePrompt(departmentNames) {
     return inquirer.prompt([
         {
             type: "input",
@@ -141,9 +141,9 @@ function addRolePrompt(departmentList) {
         },
         {
             type: "list",
-            name: "role",
+            name: "department",
             message: "Please select the role's deparment:",
-            choices: departmentList
+            choices: departmentNames
         }
     ])
 }

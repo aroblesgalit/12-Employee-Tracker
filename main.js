@@ -133,9 +133,23 @@ async function mainMenu() {
             console.table(data);
             // Run mainMenu()
             mainMenu();
-            
-        }
 
+        } else if (action === "Add a role") {
+            // Get list of deparment names and data
+            const { departmentNames, departmentList } = await queryHelper.getAllDeparments();
+            // Prompt user for role title, salary, and department
+            const { title, salary, department } = await questions.addRolePrompt(departmentNames);
+            // Get department data by department name
+            const chosenDepartment = await queryHelper.getDepartmentByName(department);
+            // Get department_id
+            const department_id = chosenDepartment[0].id;
+            // Pass data for title, salary and department_id into query for adding a role
+            await queryHelper.addRole(title, salary, department_id);
+            // Run mainMenu()
+            mainMenu();
+
+        }
+ 
     } catch (err) {
         console.log(err);
     }

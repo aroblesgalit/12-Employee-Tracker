@@ -153,6 +153,11 @@ async function getAllDeparments() {
     }
 }
 
+// Query to get a department by name
+function getDepartmentByName(name) {
+    return connection.query(viewAllDepartmentsQuery + " WHERE name = ?", [name])
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -168,5 +173,6 @@ module.exports = {
     viewAllRoles,
     addRole,
     getAllDeparments,
+    getDepartmentByName,
     connection
 }

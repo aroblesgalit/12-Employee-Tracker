@@ -148,6 +148,17 @@ function addRolePrompt(departmentNames) {
     ])
 }
 
+function chooseRole(roleTitles) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "Please choose a role to remove:",
+            choices: roleTitles
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
@@ -156,5 +167,6 @@ module.exports = {
     chooseEmployee,
     updateEmployeeRole,
     updateEmployeeManager,
-    addRolePrompt
+    addRolePrompt,
+    chooseRole
 }

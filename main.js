@@ -96,12 +96,12 @@ async function mainMenu() {
             await queryHelper.updateEmployeeRole(role_id, id);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "Update an employee's manager") {
+            // Prompt user for the employee and manager
+            // Then choose which manager to update to
         }
+
     } catch(err) {
         console.log(err);
     }
 };
-
-async function getEmployeeData() {
-
-}

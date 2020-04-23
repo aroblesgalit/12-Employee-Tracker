@@ -110,11 +110,29 @@ function updateEmployeeRole(employeeNames, roleTitles) {
     ])
 }
 
+function updateEmployeeManager(employeeNames, managerList) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Please choose an employee to remove:",
+            choices: employeeNames
+        },
+        {
+            type: "list",
+            name: "manager",
+            message: "Please select the employee's role:",
+            choices: managerList
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
     managerPrompt,
     addEmployeePrompt,
     chooseEmployee,
-    updateEmployeeRole
+    updateEmployeeRole,
+    updateEmployeeManager
 }

@@ -17,9 +17,11 @@ async function mainMenu() {
     try {
         // Prompt for mainMenu()
         const { action } = await questions.mainMenu();
+
         if (action === "Exit") {
             // End connection
             queryHelper.connection.end();
+
         } else if (action === "View all employees") {
             // Use queryHelper to view all employees
             const data = await queryHelper.viewAllEmployees();
@@ -27,6 +29,7 @@ async function mainMenu() {
             console.table(data);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "View all employees by department") {
             // Prompt user for a department
             const { department } = await questions.departmentPrompt();
@@ -36,6 +39,7 @@ async function mainMenu() {
             console.table(data);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "View all employees by Manager") {
             // Get manager list using query getAllManager()
             const managerList = await queryHelper.getAllManager();
@@ -47,7 +51,9 @@ async function mainMenu() {
             const data = await queryHelper.viewAllByManager(managerName[0], managerName[1]);
             // Log data to a table
             console.table(data);
+            // Run mainMenu()
             mainMenu();
+
         } else if (action === "Add an employee") {
             // Need list of roles and managers
             const managerList = await queryHelper.getAllManager();
@@ -64,6 +70,7 @@ async function mainMenu() {
             await queryHelper.addEmployee(first_name, last_name, role_id, manager_id);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "Remove an employee") {
             // Get list of employees
             const employeeNames = await queryHelper.getAllEmployeeNames();
@@ -78,6 +85,7 @@ async function mainMenu() {
             await queryHelper.removeEmployee(id);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "Update an employee's role") {
             // Get list of employees and roles
             const employeeNames = await queryHelper.getAllEmployeeNames();
@@ -96,6 +104,7 @@ async function mainMenu() {
             await queryHelper.updateEmployeeRole(role_id, id);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "Update an employee's manager") {
             // Get list of of employees and managers
             const employeeNames = await queryHelper.getAllEmployeeNames();
@@ -116,10 +125,15 @@ async function mainMenu() {
             await queryHelper.updateEmployeeManager(manager_id, id);
             // Run mainMenu()
             mainMenu();
+
         } else if (action === "View all roles") {
+            // Use query to viewAllRoles
             const data = await queryHelper.viewAllRoles();
+            // Log data to a table
             console.table(data);
+            // Run mainMenu()
             mainMenu();
+            
         }
 
     } catch (err) {

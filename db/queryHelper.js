@@ -129,6 +129,11 @@ function viewAllRoles() {
     return connection.query(viewAllRolesQuery);
 }
 
+// Query to add a role
+function addRole(title, salary, department_id) {
+    return connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [title, salary, department_id]); 
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -142,5 +147,6 @@ module.exports = {
     updateEmployeeRole,
     updateEmployeeManager,
     viewAllRoles,
+    addRole,
     connection
 }

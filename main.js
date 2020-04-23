@@ -160,6 +160,14 @@ async function mainMenu() {
             await queryHelper.removeRole(role_id);
             // Run mainMenu()
             mainMenu();
+        
+        } else if (action === "View all departments") {
+            // Use query to viewAllDepartments
+            const data = await queryHelper.viewAllDepartments();
+            // Log data to a table
+            console.table(data);
+            // Run mainMenu()
+            mainMenu();
         }
  
     } catch (err) {

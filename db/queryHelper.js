@@ -173,6 +173,11 @@ function addDepartment(name) {
     return connection.query("INSERT INTO department (name) VALUES (?)", [name]);
 }
 
+// Query to remove a department
+function removeDepartment(name) {
+    return connection.query("DELETE FROM department WHERE name = ?", [name]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -192,5 +197,6 @@ module.exports = {
     removeRole,
     viewAllDepartments,
     addDepartment,
+    removeDepartment,
     connection
 }

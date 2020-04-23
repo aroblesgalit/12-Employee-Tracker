@@ -117,6 +117,11 @@ function updateEmployeeRole(role_id, id) {
     return connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [role_id, id]);
 }
 
+// Query to update the manager of an employee
+function updateEmployeeManager(manager_id, id) {
+    return connection.query("UPDATE employee SET manager_id = ? WHERE id = ?", [manager_id, id]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -128,5 +133,6 @@ module.exports = {
     removeEmployee,
     getEmployeebyName,
     updateEmployeeRole,
+    updateEmployeeManager,
     connection
 }

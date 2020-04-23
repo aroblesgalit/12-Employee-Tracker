@@ -177,6 +177,15 @@ async function mainMenu() {
             await queryHelper.addDepartment(department);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "Remove a department") {
+            // Get list of all departments
+            const { departmentNames } = await queryHelper.getAllDeparments();
+            // Prompt user for which department to remove
+            const { department } = await questions.removeDepartmentPrompt(departmentNames);
+            // Pass department to query for removing a department
+            await queryHelper.removeDepartment(department);
+            // Run mainMenu()
+            mainMenu();
         }
  
     } catch (err) {

@@ -159,8 +159,8 @@ function getDepartmentByName(name) {
 }
 
 // Query for removing a role
-function removeRole(id) {
-    return connection.query("DELETE FROM role WHERE id = ?", [id]);
+function removeRole(title) {
+    return connection.query("DELETE FROM role WHERE title = ?", [title]);
 }
 
 // Query to view all departments

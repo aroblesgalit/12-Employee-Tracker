@@ -168,6 +168,11 @@ function viewAllDepartments() {
     return connection.query(viewAllDepartmentsQuery);
 }
 
+// Query to add a department
+function addDepartment(name) {
+    return connection.query("INSERT INTO department (name) VALUES (?)", [name]);
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -186,5 +191,6 @@ module.exports = {
     getDepartmentByName,
     removeRole,
     viewAllDepartments,
+    addDepartment,
     connection
 }

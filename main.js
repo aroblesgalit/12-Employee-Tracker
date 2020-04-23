@@ -64,6 +64,14 @@ async function mainMenu() {
             await queryHelper.addEmployee(first_name, last_name, role_id, manager_id);
             // Run mainMenu()
             mainMenu();
+        } else if (action === "Remove an employee") {
+            // Get list of employees
+            const { employeeList, employeeNames } = await queryHelper.getAllEmployeeNames();
+            // Prompt user to choose an employee
+            const { employee } = await questions.chooseEmployee(employeeList);
+            // Get id of choosen employee
+
+            // Use id and pass it on to query to remove employee
         }
     } catch(err) {
         console.log(err);

@@ -76,6 +76,22 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
     return connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [first_name, last_name, role_id, manager_id]);
 }
 
+async function getAllEmployeeNames() {
+    try {
+        // Get complete list of employees
+        const employeeList = await viewAllEmployees();
+        // Store employee names into an array
+        const employeeNames = employeeList.map(employee => {
+            return employee.first_name + " " + employee.last_name;
+        });
+        // Return an array of employee names and the employee list
+        return { employeeList, employeeNames };
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     viewAllEmployees,
     viewAllByDepartment,
@@ -83,5 +99,6 @@ module.exports = {
     viewAllByManager,
     getAllRoles,
     addEmployee,
+    getAllEmployeeNames,
     connection
 }

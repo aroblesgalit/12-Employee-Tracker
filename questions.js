@@ -82,9 +82,21 @@ function addEmployeePrompt(roleTitles, managerList) {
     ])
 }
 
+function chooseEmployee(employeeList) {
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Please choose an employee to remove:",
+            choices: employeeList
+        }
+    ])
+}
+
 module.exports = {
     mainMenu,
     departmentPrompt,
     managerPrompt,
-    addEmployeePrompt
+    addEmployeePrompt,
+    chooseEmployee
 }
